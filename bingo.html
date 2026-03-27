@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road Trip Bingo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#fff9e6;padding:16px;min-height:100vh}
+.bingo-title{text-align:center;font-size:26px;font-weight:bold;color:#ff6b35;margin:0 0 4px;text-shadow:2px 2px 0 #ffd93d}
+.bingo-sub{text-align:center;color:#888;font-size:13px;margin:0 0 14px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;justify-content:center}
+.tab{flex:1;min-width:80px;max-width:110px;padding:8px 4px;border:2px solid #ccc;border-radius:10px;background:#f9f9f9;font-size:13px;font-weight:bold;text-align:center;color:#555;cursor:pointer;transition:all 0.2s}
+.tab.active-p{background:#f8bbd0;border-color:#c2185b;color:#c2185b}
+.tab.active-e{background:#c8e6c9;border-color:#2e7d32;color:#2e7d32}
+.tab.active-g{background:#ffe0b2;border-color:#e65100;color:#e65100}
+.tab.active-b{background:#bbdefb;border-color:#1565c0;color:#1565c0}
+.card{display:none}
+.card.active{display:block}
+.card-title{text-align:center;font-size:18px;font-weight:bold;margin-bottom:8px}
+.card-title.tp{color:#c2185b}
+.card-title.te{color:#2e7d32}
+.card-title.tg{color:#e65100}
+.card-title.tb{color:#1565c0}
+.bgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:10px}
+.bhdr{color:white;font-weight:bold;font-size:16px;text-align:center;padding:8px 2px;border-radius:6px}
+.hp{background:#e91e8c}
+.he{background:#2e7d32}
+.hg{background:#e65100}
+.hb{background:#1565c0}
+.bsq{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:62px;padding:4px 2px;border:2px solid #e0e0e0;border-radius:8px;background:#fffbe6;cursor:pointer;font-size:10px;color:#555;text-align:center;line-height:1.2;user-select:none;transition:all 0.15s}
+.bsq:hover{border-color:#aaa}
+.bsq.marked{background:#ffd93d;border-color:#e6b800;color:#7a6000}
+.bsq.free{cursor:default}
+.bsq.free.fp{background:#e91e8c;border-color:#c2185b;color:white}
+.bsq.free.fe{background:#2e7d32;border-color:#1b5e20;color:white}
+.bsq.free.fg{background:#e65100;border-color:#bf360c;color:white}
+.bsq.free.fb{background:#1565c0;border-color:#0d47a1;color:white}
+.bsq.win{background:#6bcf63;border-color:#4aaa42;color:#1a4a16}
+.bsq .ci{font-size:20px}
+.btn-row{display:flex;gap:8px;justify-content:center;margin-bottom:8px}
+.btn-clear{padding:7px 18px;border:2px solid #ccc;border-radius:20px;background:white;font-size:13px;cursor:pointer;font-family:Georgia,serif}
+.btn-new{padding:7px 18px;border:none;border-radius:20px;background:#ff6b35;color:white;font-size:13px;cursor:pointer;font-family:Georgia,serif;font-weight:bold}
+.btn-new:hover{background:#e55a26}
+.win-banner{display:none;text-align:center;font-size:22px;font-weight:bold;color:#ff6b35;padding:8px;margin-bottom:8px}
+.win-banner.show{display:block}
+.hint{text-align:center;font-size:12px;color:#aaa;margin-top:4px}
+</style>
+</head>
+<body>
+
+<p class="bingo-title">🎯 Road Trip Bingo!</p>
+<p class="bingo-sub">Tap your name for your card. Hit "New Card!" to shuffle!</p>
+
+<div class="tabs">
+  <div class="tab active-p" id="tab-p" onclick="showCard('p')">👸 Princess</div>
+  <div class="tab" id="tab-e" onclick="showCard('e')">🦕 Explorer</div>
+  <div class="tab" id="tab-g" onclick="showCard('g')">📚 Grandma</div>
+  <div class="tab" id="tab-b" onclick="showCard('b')">🚛 Babo</div>
+</div>
+
+<div id="card-p" class="card active">
+  <div class="card-title tp">👸 The Princess's Card</div>
+  <div class="win-banner" id="win-p">🎉 BINGO! You win! 🎉</div>
+  <div class="bgrid" id="grid-p">
+    <div class="bhdr hp">B</div><div class="bhdr hp">I</div><div class="bhdr hp">N</div><div class="bhdr hp">G</div><div class="bhdr hp">O</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-clear" onclick="clearCard('p')">Clear marks</button>
+    <button class="btn-new" onclick="newCard('p')">New card! 🔀</button>
+  </div>
+</div>
+
+<div id="card-e" class="card">
+  <div class="card-title te">🦕 The Explorer's Card</div>
+  <div class="win-banner" id="win-e">🎉 BINGO! You win! 🎉</div>
+  <div class="bgrid" id="grid-e">
+    <div class="bhdr he">B</div><div class="bhdr he">I</div><div class="bhdr he">N</div><div class="bhdr he">G</div><div class="bhdr he">O</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-clear" onclick="clearCard('e')">Clear marks</button>
+    <button class="btn-new" onclick="newCard('e')">New card! 🔀</button>
+  </div>
+</div>
+
+<div id="card-g" class="card">
+  <div class="card-title tg">📚 Grandma's Card</div>
+  <div class="win-banner" id="win-g">🎉 BINGO! You win! 🎉</div>
+  <div class="bgrid" id="grid-g">
+    <div class="bhdr hg">B</div><div class="bhdr hg">I</div><div class="bhdr hg">N</div><div class="bhdr hg">G</div><div class="bhdr hg">O</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-clear" onclick="clearCard('g')">Clear marks</button>
+    <button class="btn-new" onclick="newCard('g')">New card! 🔀</button>
+  </div>
+</div>
+
+<div id="card-b" class="card">
+  <div class="card-title tb">🚛 Babo's Card</div>
+  <div class="win-banner" id="win-b">🎉 BINGO! You win! 🎉</div>
+  <div class="bgrid" id="grid-b">
+    <div class="bhdr hb">B</div><div class="bhdr hb">I</div><div class="bhdr hb">N</div><div class="bhdr hb">G</div><div class="bhdr hb">O</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-clear" onclick="clearCard('b')">Clear marks</button>
+    <button class="btn-new" onclick="newCard('b')">New card! 🔀</button>
+  </div>
+</div>
+
+<p class="hint">Tap squares to mark them. Get 5 in a row to win!</p>
+
+<script>
+var allSquares=[
+  {i:"🌵",l:"Cactus"},{i:"🚂",l:"Train"},{i:"🛣️",l:"Route 66"},{i:"💧",l:"Water tower"},
+  {i:"🐄",l:"Cow"},{i:"⛽",l:"Gas station"},{i:"🌉",l:"Bridge"},{i:"🍦",l:"Ice cream"},
+  {i:"🐎",l:"Horse"},{i:"🌺",l:"Wildflowers"},{i:"🚛",l:"Big truck"},{i:"🌾",l:"Wheat field"},
+  {i:"🌮",l:"Taco stand"},{i:"🏔️",l:"Mountain"},{i:"🦅",l:"Eagle"},{i:"💡",l:"Neon lights"},
+  {i:"🎠",l:"Roadside art"},{i:"🌅",l:"Sunset"},{i:"🍖",l:"Barbecue"},{i:"🏜️",l:"Desert sand"},
+  {i:"🚜",l:"Tractor"},{i:"🌊",l:"River"},{i:"🎪",l:"Drive-in"},{i:"🏁",l:"State border"},
+  {i:"⛪",l:"Church"},{i:"🌵",l:"Cactus 2"},{i:"🦌",l:"Deer"},{i:"🌻",l:"Sunflower"}
+];
+var freeSquare={i:"🛤️",l:"Route 66!"};
+var boards={p:[],e:[],g:[],b:[]};
+var marks={p:[],e:[],g:[],b:[]};
+var colors={p:'fp',e:'fe',g:'fg',b:'fb'};
+var tabs={p:'active-p',e:'active-e',g:'active-g',b:'active-b'};
+
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i];a[i]=a[j];a[j]=t;
+  }
+  return a;
+}
+
+function newCard(who){
+  var shuffled=shuffle(allSquares).slice(0,24);
+  boards[who]=shuffled.slice(0,12).concat([freeSquare]).concat(shuffled.slice(12));
+  marks[who]=new Array(25).fill(false);
+  marks[who][12]=true;
+  buildGrid(who);
+  document.getElementById('win-'+who).className='win-banner';
+}
+
+function clearCard(who){
+  marks[who]=new Array(25).fill(false);
+  marks[who][12]=true;
+  buildGrid(who);
+  document.getElementById('win-'+who).className='win-banner';
+}
+
+function toggle(who,idx){
+  if(idx===12)return;
+  marks[who][idx]=!marks[who][idx];
+  buildGrid(who);
+  checkWin(who);
+}
+
+function buildGrid(who){
+  var grid=document.getElementById('grid-'+who);
+  var existing=grid.querySelectorAll('.bsq');
+  for(var k=0;k<existing.length;k++)existing[k].remove();
+  var fc=colors[who];
+  for(var i=0;i<25;i++){
+    (function(idx){
+      var sq=boards[who][idx];
+      var div=document.createElement('div');
+      var isFree=idx===12;
+      var cls='bsq'+(isFree?' free '+fc:'')+(marks[who][idx]&&!isFree?' marked':'');
+      div.className=cls;
+      div.innerHTML='<span class="ci">'+sq.i+'</span><span>'+sq.l+'</span>';
+      if(!isFree)div.onclick=function(){toggle(who,idx);};
+      grid.appendChild(div);
+    })(i);
+  }
+}
+
+function checkWin(who){
+  var lines=[
+    [0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],
+    [0,5,10,15,20],[1,6,11,16,21],[2,7,12,17,22],[3,8,13,18,23],[4,9,14,19,24],
+    [0,6,12,18,24],[4,8,12,16,20]
+  ];
+  var won=false;
+  var grid=document.getElementById('grid-'+who);
+  var squares=grid.querySelectorAll('.bsq');
+  lines.forEach(function(line){
+    if(line.every(function(i){return marks[who][i]||i===12;})){
+      won=true;
+      line.forEach(function(i){if(squares[i])squares[i].classList.add('win');});
+    }
+  });
+  if(won)document.getElementById('win-'+who).className='win-banner show';
+}
+
+function showCard(who){
+  ['p','e','g','b'].forEach(function(w){
+    document.getElementById('card-'+w).className='card'+(w===who?' active':'');
+    document.getElementById('tab-'+w).className='tab'+(w===who?' '+tabs[w]:'');
+  });
+}
+
+newCard('p');newCard('e');newCard('g');newCard('b');
+</script>
+</body>
+</html>
