@@ -1,92 +1,93 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Road Trip Food Challenge 🍔</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
 
- :root {
-  --gold: #FFD166;
-  --gold-light: #FFE29A;
-  --cream: #FFFDFB;
-  --tan: #F3E9F8;
-  --brown: #5F4B7A;
-  --brown-mid: #7A6996;
-  --red: #FF8FA3;
-  --green: #7ED6B4;
-  --blue: #7BDFF2;
-  --lilac: #D7C9E8;
-  --mint: #C3F9D9;
-  --berry: #FF6B6B;
-}
+  :root {
+    --gold: #FFD166;
+    --gold-light: #FFE29A;
+    --cream: #FFFDFB;
+    --tan: #F3E9F8;
+    --brown: #5F4B7A;
+    --brown-mid: #7A6996;
+    --red: #FF8FA3;
+    --green: #7ED6B4;
+    --blue: #7BDFF2;
+    --lilac: #D7C9E8;
+    --mint: #C3F9D9;
+    --berry: #FF6B6B;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Nunito', sans-serif;
-    background: var(--cream);
+    background: linear-gradient(180deg, #EEF6FC 0%, #F8FBFE 35%, #FFFFFF 100%);
     min-height: 100vh;
     padding: 16px;
     overflow-x: hidden;
+    color: var(--brown);
   }
 
-  /* Checkerboard header strip */
   .header-strip {
     height: 18px;
     background: repeating-linear-gradient(
       90deg,
-      var(--red) 0px, var(--red) 18px,
-      white 18px, white 36px
+      #FFD166 0px, #FFD166 18px,
+      #7BDFF2 18px, #7BDFF2 36px,
+      #FF8FA3 36px, #FF8FA3 54px,
+      #C3F9D9 54px, #C3F9D9 72px,
+      #D7C9E8 72px, #D7C9E8 90px
     );
-    border-radius: 8px 8px 0 0;
+    border-radius: 10px 10px 0 0;
     margin-bottom: 0;
   }
+
   .footer-strip {
     height: 18px;
     background: repeating-linear-gradient(
       90deg,
-      white 0px, white 18px,
-      var(--red) 18px, var(--red) 36px
+      #D7C9E8 0px, #D7C9E8 18px,
+      #C3F9D9 18px, #C3F9D9 36px,
+      #FF8FA3 36px, #FF8FA3 54px,
+      #7BDFF2 54px, #7BDFF2 72px,
+      #FFD166 72px, #FFD166 90px
     );
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 10px 10px;
     margin-top: 0;
   }
 
   .menu-board {
-    background: var(--brown);
-    padding: 20px 20px 16px;
+    background: linear-gradient(180deg, #F8F2FC 0%, #FDFDFF 100%);
+    padding: 22px 20px 18px;
     text-align: center;
+    border-bottom: 2px solid #EADFF4;
   }
 
   .menu-title {
     font-family: 'Fredoka One', cursive;
     font-size: 2rem;
-    color: var(--gold-light);
-    text-shadow: 2px 2px 0 #1a1008;
+    color: #6B5C8A;
+    text-shadow: none;
     line-height: 1.1;
   }
 
   .menu-subtitle {
-    font-size: 0.85rem;
-    color: var(--tan);
-    margin-top: 4px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 0.88rem;
+    color: #8A78B5;
+    margin-top: 6px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
   }
 
-  /* Score bar */
   .score-bar {
-    background: var(--gold);
-    padding: 10px 16px;
+    background: linear-gradient(90deg, #FFF6E8, #F5FAFE);
+    padding: 12px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    border-top: 1px solid #EADFF4;
+    border-bottom: 1px solid #EADFF4;
   }
 
   .score-item {
@@ -101,7 +102,7 @@
   }
 
   .score-label {
-    font-size: 0.65rem;
+    font-size: 0.66rem;
     font-weight: 800;
     color: var(--brown-mid);
     text-transform: uppercase;
@@ -115,86 +116,85 @@
   }
 
   .progress-track {
-    background: rgba(61,47,31,0.25);
+    background: rgba(95, 75, 122, 0.16);
     border-radius: 20px;
     height: 14px;
     overflow: hidden;
-    border: 2px solid var(--brown);
+    border: 2px solid rgba(107, 92, 138, 0.28);
   }
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--brown), var(--brown-mid));
+    background: linear-gradient(90deg, #7BDFF2, #D7C9E8, #FFD166);
     border-radius: 20px;
     transition: width 0.5s cubic-bezier(.34,1.56,.64,1);
     width: 0%;
   }
 
-  /* Category sections */
   .categories {
-    padding: 12px;
+    padding: 14px 12px;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
   .category {
-    background: white;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 3px 12px rgba(61,47,31,0.12);
-    border: 2px solid var(--tan);
+    box-shadow: 0 8px 24px rgba(79,111,175,0.10);
+    border: 1px solid rgba(146,161,195,0.18);
   }
 
   .cat-header {
-    padding: 10px 14px;
+    padding: 11px 14px;
     display: flex;
     align-items: center;
     gap: 8px;
     font-family: 'Fredoka One', cursive;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     color: white;
   }
 
-  .cat-header.classics { background: var(--red); }
-  .cat-header.sweets   { background: #9b59b6; }
-  .cat-header.snacks   { background: var(--blue); }
-  .cat-header.drinks   { background: var(--green); }
+  .cat-header.classics { background: linear-gradient(90deg, #FF8FA3, #FFB3C1); }
+  .cat-header.sweets   { background: linear-gradient(90deg, #D7C9E8, #E9DDF6); color: #5F4B7A; }
+  .cat-header.snacks   { background: linear-gradient(90deg, #7BDFF2, #BEEFFF); color: #2F5E73; }
+  .cat-header.drinks   { background: linear-gradient(90deg, #7ED6B4, #C3F9D9); color: #2D5B4A; }
 
-  .cat-emoji { font-size: 1.3rem; }
+  .cat-emoji { font-size: 1.25rem; }
 
   .food-list {
-    padding: 8px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
-  /* Food card */
   .food-card {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: var(--cream);
-    border: 2px solid var(--tan);
+    padding: 11px 12px;
+    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid rgba(215,201,232,0.55);
     transition: all 0.25s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(79,111,175,0.05);
   }
 
   .food-card.tried {
-    background: #f0fdf4;
-    border-color: var(--green);
+    background: #F4FFF8;
+    border-color: #A9DFC5;
   }
 
   .food-card.tried::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(39,174,96,0.06) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(126,214,180,0.10) 0%, transparent 60%);
   }
 
   .food-emoji {
@@ -211,25 +211,24 @@
   }
 
   .food-name {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 800;
     color: var(--brown);
     line-height: 1.2;
   }
 
   .food-desc {
-    font-size: 0.72rem;
+    font-size: 0.73rem;
     color: var(--brown-mid);
-    margin-top: 1px;
+    margin-top: 2px;
     font-weight: 600;
   }
 
-  /* Try button */
   .try-btn {
-    background: var(--tan);
-    border: 2px solid var(--gold);
+    background: #F7EFFB;
+    border: 1px solid #D7C9E8;
     border-radius: 20px;
-    padding: 5px 12px;
+    padding: 6px 12px;
     font-family: 'Fredoka One', cursive;
     font-size: 0.82rem;
     color: var(--brown);
@@ -240,17 +239,16 @@
   }
 
   .try-btn:hover {
-    background: var(--gold);
+    background: #EDE3F7;
     transform: scale(1.05);
   }
 
   .food-card.tried .try-btn {
-    background: var(--green);
-    border-color: #1e8449;
+    background: #7ED6B4;
+    border-color: #69B998;
     color: white;
   }
 
-  /* Star rating — only shows after tried */
   .stars {
     display: flex;
     gap: 2px;
@@ -271,17 +269,17 @@
 
   .stars-hidden { display: none; }
 
-  /* Wildcard section */
   .wildcard-section {
-    background: white;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.97);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 3px 12px rgba(61,47,31,0.12);
-    border: 2px dashed var(--gold);
+    box-shadow: 0 8px 24px rgba(79,111,175,0.10);
+    border: 1px dashed rgba(255, 209, 102, 0.9);
   }
 
   .cat-header.wildcard {
-    background: linear-gradient(135deg, #e67e22, #d9a441);
+    background: linear-gradient(90deg, #FFD166, #FFE29A);
+    color: #7A5A1C;
   }
 
   .wildcard-add {
@@ -289,14 +287,15 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    border-bottom: 2px dashed var(--tan);
+    border-bottom: 1px dashed #EADFF4;
     flex-wrap: wrap;
+    background: #FFFCF7;
   }
 
   .emoji-picker-btn {
     font-size: 1.6rem;
-    background: var(--tan);
-    border: 2px solid var(--gold);
+    background: #FFFFFF;
+    border: 1px solid #D7C9E8;
     border-radius: 10px;
     width: 46px;
     height: 46px;
@@ -309,14 +308,14 @@
     position: relative;
   }
 
-  .emoji-picker-btn:hover { transform: scale(1.1); }
+  .emoji-picker-btn:hover { transform: scale(1.08); }
 
   .emoji-dropdown {
     position: absolute;
     top: 50px;
     left: 0;
     background: white;
-    border: 2px solid var(--gold);
+    border: 1px solid #D7C9E8;
     border-radius: 12px;
     padding: 8px;
     display: grid;
@@ -336,40 +335,51 @@
     transition: background 0.15s;
   }
 
-  .emoji-option:hover { background: var(--tan); }
+  .emoji-option:hover { background: #F7EFFB; }
 
   .wildcard-input {
     flex: 1;
     min-width: 120px;
-    border: 2px solid var(--tan);
+    border: 1px solid #D7C9E8;
     border-radius: 10px;
     padding: 10px 12px;
     font-family: 'Nunito', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
     color: var(--brown);
-    background: var(--cream);
+    background: #FFFFFF;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  .wildcard-input:focus { border-color: var(--gold); }
-  .wildcard-input::placeholder { color: var(--brown-mid); opacity: 0.6; font-weight: 600; }
+  .wildcard-input:focus {
+    border-color: #BDA7DA;
+    box-shadow: 0 0 0 3px rgba(215,201,232,0.25);
+  }
+
+  .wildcard-input::placeholder {
+    color: var(--brown-mid);
+    opacity: 0.6;
+    font-weight: 600;
+  }
 
   .wildcard-add-btn {
-    background: var(--gold);
+    background: linear-gradient(90deg, #FFD166, #FFE29A);
     border: none;
     border-radius: 10px;
     padding: 10px 14px;
     font-family: 'Fredoka One', cursive;
     font-size: 0.95rem;
-    color: var(--brown);
+    color: #6A4B12;
     cursor: pointer;
     transition: all 0.2s;
     flex-shrink: 0;
   }
 
-  .wildcard-add-btn:hover { background: var(--gold-light); transform: scale(1.05); }
+  .wildcard-add-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.02);
+  }
 
   .wildcard-empty {
     padding: 16px;
@@ -380,7 +390,6 @@
     font-style: italic;
   }
 
-  /* Delete button on wildcard cards */
   .delete-btn {
     background: none;
     border: none;
@@ -395,11 +404,10 @@
 
   .delete-btn:hover { opacity: 0.9; transform: scale(1.2); }
 
-  /* Celebration overlay */
   #celebration {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(78, 62, 111, 0.52);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -416,14 +424,15 @@
   }
 
   .celebrate-box {
-    background: var(--brown);
-    border: 4px solid var(--gold);
+    background: linear-gradient(180deg, #FFFDFB 0%, #F8F2FC 100%);
+    border: 3px solid #FFD166;
     border-radius: 20px;
     padding: 30px 24px;
     text-align: center;
-    max-width: 300px;
+    max-width: 320px;
     transform: scale(0.7);
     transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 18px 40px rgba(79,111,175,0.18);
   }
 
   #celebration.show .celebrate-box {
@@ -435,34 +444,33 @@
   .celebrate-title {
     font-family: 'Fredoka One', cursive;
     font-size: 1.8rem;
-    color: var(--gold-light);
+    color: #6B5C8A;
     margin: 8px 0 4px;
-    text-shadow: 2px 2px 0 #1a1008;
+    text-shadow: none;
   }
 
   .celebrate-msg {
-    font-size: 0.9rem;
-    color: var(--tan);
-    font-weight: 600;
-    line-height: 1.4;
+    font-size: 0.92rem;
+    color: var(--brown-mid);
+    font-weight: 700;
+    line-height: 1.45;
   }
 
   .celebrate-close {
     margin-top: 16px;
-    background: var(--gold);
+    background: linear-gradient(90deg, #FFD166, #FFE29A);
     border: none;
     border-radius: 30px;
     padding: 10px 28px;
     font-family: 'Fredoka One', cursive;
-    font-size: 1.1rem;
-    color: var(--brown);
+    font-size: 1.05rem;
+    color: #6A4B12;
     cursor: pointer;
     transition: transform 0.2s;
   }
 
   .celebrate-close:hover { transform: scale(1.05); }
 
-  /* Confetti */
   .confetti-piece {
     position: fixed;
     width: 10px;
@@ -480,7 +488,6 @@
     }
   }
 
-  /* Bounce in for new tries */
   @keyframes bounceIn {
     0%   { transform: scale(1); }
     40%  { transform: scale(1.06); }
@@ -490,513 +497,85 @@
 
   .bounce { animation: bounceIn 0.4s ease; }
 
-  /* Milestone toast */
   .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(80px);
-    background: var(--brown);
-    color: var(--gold-light);
+    background: #6B5C8A;
+    color: #FFF8E8;
     font-family: 'Fredoka One', cursive;
     font-size: 1rem;
     padding: 10px 22px;
     border-radius: 30px;
-    border: 2px solid var(--gold);
+    border: 2px solid #FFD166;
     z-index: 900;
     transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
     white-space: nowrap;
     pointer-events: none;
+    box-shadow: 0 10px 24px rgba(79,111,175,0.16);
   }
 
   .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 640px) {
+    body {
+      padding: 12px;
+    }
+
+    .menu-title {
+      font-size: 1.65rem;
+    }
+
+    .menu-subtitle {
+      font-size: 0.8rem;
+    }
+
+    .score-num {
+      font-size: 1.35rem;
+    }
+
+    .food-card {
+      padding: 10px;
+      gap: 8px;
+    }
+
+    .food-emoji {
+      font-size: 1.6rem;
+    }
+
+    .food-name {
+      font-size: 0.88rem;
+    }
+
+    .food-desc {
+      font-size: 0.7rem;
+    }
+
+    .try-btn {
+      font-size: 0.74rem;
+      padding: 6px 10px;
+    }
+
+    .star {
+      font-size: 1.15rem;
+    }
+
+    .wildcard-add {
+      align-items: stretch;
+    }
+
+    .wildcard-input {
+      min-width: 100%;
+    }
+
+    .wildcard-add-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .emoji-dropdown {
+      width: 210px;
+    }
+  }
 </style>
-</head>
-<body>
-
-<div class="header-strip"></div>
-<div class="menu-board">
-  <div class="menu-title">🍔 Road Trip Food Challenge!</div>
-  <div class="menu-subtitle">Try it • Rate it • Collect them all!</div>
-</div>
-
-<!-- Score bar -->
-<div class="score-bar">
-  <div class="score-item">
-    <div class="score-num" id="triedCount">0</div>
-    <div class="score-label">Tried</div>
-  </div>
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-  </div>
-  <div class="score-item">
-    <div class="score-num" id="totalCount">0</div>
-    <div class="score-label">Total</div>
-  </div>
-</div>
-
-<div class="categories" id="categoriesContainer"></div>
-
-<!-- Wildcard Section -->
-<div style="padding: 0 12px 16px;">
-  <div class="wildcard-section">
-    <div class="cat-header wildcard">
-      <span class="cat-emoji">✍️</span> Our Own Discoveries!
-    </div>
-    <div class="wildcard-add">
-      <div class="emoji-picker-btn" id="emojiPickerBtn" title="Pick an emoji">
-        <span id="chosenEmoji">🍽️</span>
-        <div class="emoji-dropdown" id="emojiDropdown" style="display:none;">
-          <!-- populated by JS -->
-        </div>
-      </div>
-      <input class="wildcard-input" id="wildcardInput" type="text" maxlength="40" placeholder="What did you discover?">
-      <button class="wildcard-add-btn" onclick="addWildcard()">+ Add!</button>
-    </div>
-    <div class="food-list" id="wildcardList">
-      <div class="wildcard-empty" id="wildcardEmpty">No discoveries yet — get out there and eat something! 🗺️</div>
-    </div>
-  </div>
-</div>
-
-<div class="footer-strip"></div>
-
-<!-- Celebration overlay -->
-<div id="celebration">
-  <div class="celebrate-box">
-    <div class="celebrate-emoji" id="celebEmoji">🏆</div>
-    <div class="celebrate-title" id="celebTitle">You Did It!</div>
-    <div class="celebrate-msg" id="celebMsg">Amazing job, food explorer!</div>
-    <button class="celebrate-close" onclick="closeCelebration()">Keep Going! 🎉</button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-const FOODS = [
-  {
-    category: "Route 66 Classics",
-    color: "classics",
-    emoji: "🛣️",
-    items: [
-      { e: "🌭", name: "Corn Dog",       desc: "A fairground classic — battered & fried!" },
-      { e: "🍖", name: "BBQ Ribs",       desc: "Smoky, saucy, messy fingers required" },
-      { e: "🥧", name: "Slice of Pie",   desc: "Apple, cherry, or whatever's on the menu" },
-      { e: "🍔", name: "Diner Burger",   desc: "A real roadside burger — the bigger the better" },
-      { e: "🌮", name: "Taco",           desc: "New Mexico or Texas style — spicy optional!" },
-      { e: "🍗", name: "Fried Chicken",  desc: "Southern style, crispy and golden" },
-    ]
-  },
-  {
-    category: "Sweet Stops",
-    color: "sweets",
-    emoji: "🍭",
-    items: [
-      { e: "🍦", name: "Soft Serve Ice Cream", desc: "A must-have on a hot road trip day!" },
-      { e: "🥞", name: "Pancakes with Syrup",  desc: "Stack 'em high for a diner breakfast" },
-      { e: "🍩", name: "Glazed Donut",          desc: "Fresh from a roadside bakery" },
-      { e: "🍫", name: "Fudge",                 desc: "A gift shop classic — so rich!" },
-      { e: "🧁", name: "Cupcake",               desc: "From a cute little local bakery" },
-    ]
-  },
-  {
-    category: "Snacks & Sides",
-    color: "snacks",
-    emoji: "🎒",
-    items: [
-      { e: "🧀", name: "Nachos with Cheese", desc: "Great for sharing at a gas station stop!" },
-      { e: "🍟", name: "Waffle Fries",        desc: "The crunchiest fries on Route 66" },
-      { e: "🌽", name: "Corn on the Cob",     desc: "Buttery, fresh, summery goodness" },
-      { e: "🥜", name: "Trail Mix",            desc: "Perfect for munching in the car" },
-      { e: "🫙", name: "Salsa & Chips",        desc: "New Mexico green chile salsa — wow!" },
-    ]
-  },
-  {
-    category: "Cool Drinks",
-    color: "drinks",
-    emoji: "🧃",
-    items: [
-      { e: "🥤", name: "Chocolate Milkshake", desc: "Extra thick, with a cherry on top" },
-      { e: "🍋", name: "Fresh Lemonade",      desc: "Squeezed at a roadside stand" },
-      { e: "🧃", name: "Horchata",            desc: "Sweet rice drink — try it in New Mexico!" },
-      { e: "☕", name: "Hot Chocolate",        desc: "Cozy mornings at the Hampton Inn" },
-    ]
-  }
-];
-
-// State: { foodKey: { tried: bool, stars: 0-5 } }
-let state = {};
-
-// Milestones already shown
-let milestonesShown = new Set();
-
-const TOTAL = FOODS.reduce((s, c) => s + c.items.length, 0);
-document.getElementById('totalCount').textContent = TOTAL;
-
-// Build initial state
-FOODS.forEach(cat => {
-  cat.items.forEach(item => {
-    const key = cat.category + '|' + item.name;
-    state[key] = { tried: false, stars: 0 };
-  });
-});
-
-// Load from localStorage
-try {
-  const saved = localStorage.getItem('foodChallenge');
-  if (saved) state = JSON.parse(saved);
-} catch(e) {}
-
-function save() {
-  try { localStorage.setItem('foodChallenge', JSON.stringify(state)); } catch(e) {}
-}
-
-function getTriedCount() {
-  return Object.values(state).filter(v => v.tried).length;
-}
-
-function updateScorebar() {
-  const tried = getTriedCount();
-  document.getElementById('triedCount').textContent = tried;
-  const pct = (tried / TOTAL) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-}
-
-// Render all categories
-function render() {
-  const container = document.getElementById('categoriesContainer');
-  container.innerHTML = '';
-
-  FOODS.forEach(cat => {
-    const section = document.createElement('div');
-    section.className = 'category';
-
-    const header = document.createElement('div');
-    header.className = `cat-header ${cat.color}`;
-    header.innerHTML = `<span class="cat-emoji">${cat.emoji}</span> ${cat.category}`;
-    section.appendChild(header);
-
-    const list = document.createElement('div');
-    list.className = 'food-list';
-
-    cat.items.forEach(item => {
-      const key = cat.category + '|' + item.name;
-      const s = state[key];
-      const card = document.createElement('div');
-      card.className = 'food-card' + (s.tried ? ' tried' : '');
-      card.id = 'card-' + btoa(unescape(encodeURIComponent(key)));
-
-      // Stars HTML
-      let starsHtml = `<div class="stars${s.tried ? '' : ' stars-hidden'}" data-key="${key}">`;
-      for (let i = 1; i <= 5; i++) {
-        starsHtml += `<span class="star${s.stars >= i ? ' lit' : ''}" data-val="${i}">⭐</span>`;
-      }
-      starsHtml += '</div>';
-
-      card.innerHTML = `
-        <span class="food-emoji">${item.e}</span>
-        <div class="food-info">
-          <div class="food-name">${item.name}</div>
-          <div class="food-desc">${item.desc}</div>
-        </div>
-        ${starsHtml}
-        <button class="try-btn" data-key="${key}">${s.tried ? '✅ Tried!' : 'I tried it!'}</button>
-      `;
-      list.appendChild(card);
-    });
-
-    section.appendChild(list);
-    container.appendChild(section);
-  });
-
-  // Attach events
-  document.querySelectorAll('.try-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleTried(btn.dataset.key);
-    });
-  });
-
-  document.querySelectorAll('.star').forEach(star => {
-    star.addEventListener('click', e => {
-      e.stopPropagation();
-      const key = star.closest('.stars').dataset.key;
-      const val = parseInt(star.dataset.val);
-      setStars(key, val);
-    });
-  });
-}
-
-function toggleTried(key) {
-  const s = state[key];
-  s.tried = !s.tried;
-  if (!s.tried) s.stars = 0;
-  save();
-
-  const cardId = 'card-' + btoa(unescape(encodeURIComponent(key)));
-  const card = document.getElementById(cardId);
-  if (card) {
-    card.classList.toggle('tried', s.tried);
-    card.classList.add('bounce');
-    setTimeout(() => card.classList.remove('bounce'), 400);
-
-    const btn = card.querySelector('.try-btn');
-    if (btn) btn.textContent = s.tried ? '✅ Tried!' : 'I tried it!';
-
-    const stars = card.querySelector('.stars');
-    if (stars) {
-      stars.classList.toggle('stars-hidden', !s.tried);
-      // Reset star display
-      stars.querySelectorAll('.star').forEach((st, i) => {
-        st.classList.toggle('lit', s.stars > i);
-      });
-    }
-  }
-
-  updateScorebarFull();
-  checkMilestones();
-}
-
-function setStars(key, val) {
-  state[key].stars = val;
-  save();
-  // Update display
-  const cardId = 'card-' + btoa(unescape(encodeURIComponent(key)));
-  const card = document.getElementById(cardId);
-  if (card) {
-    card.querySelectorAll('.star').forEach((st, i) => {
-      st.classList.toggle('lit', val > i);
-    });
-  }
-}
-
-const MILESTONES = [
-  { count: 5,  emoji: '🎉', title: 'Food Explorer!',    msg: "You've tried 5 foods already — you're on a roll!" },
-  { count: 10, emoji: '🌟', title: 'Taste Adventurer!', msg: "10 foods tried! Route 66 tastes amazing, right?" },
-  { count: 15, emoji: '🏆', title: 'Road Trip Foodie!', msg: "15 foods! You're practically a food critic now!" },
-  { count: TOTAL, emoji: '👑', title: 'GRAND CHAMPION!', msg: "You tried EVERY food on the list! You are the ultimate Road Trip Food Champion! 🎊" },
-];
-
-function checkMilestones() {
-  const tried = getTriedCount();
-  MILESTONES.forEach(m => {
-    if (tried >= m.count && !milestonesShown.has(m.count)) {
-      milestonesShown.add(m.count);
-      setTimeout(() => showCelebration(m.emoji, m.title, m.msg), 200);
-    }
-  });
-}
-
-function showCelebration(emoji, title, msg) {
-  document.getElementById('celebEmoji').textContent = emoji;
-  document.getElementById('celebTitle').textContent = title;
-  document.getElementById('celebMsg').textContent = msg;
-  document.getElementById('celebration').classList.add('show');
-  launchConfetti();
-}
-
-function closeCelebration() {
-  document.getElementById('celebration').classList.remove('show');
-}
-
-function launchConfetti() {
-  const colors = ['#d9a441','#c0392b','#27ae60','#2980b9','#9b59b6','#f39c12','#fff8ef'];
-  for (let i = 0; i < 60; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    piece.style.cssText = `
-      left: ${Math.random() * 100}vw;
-      background: ${colors[Math.floor(Math.random() * colors.length)]};
-      width: ${6 + Math.random() * 8}px;
-      height: ${6 + Math.random() * 8}px;
-      animation-duration: ${1.5 + Math.random() * 2}s;
-      animation-delay: ${Math.random() * 0.5}s;
-      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-    `;
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 3500);
-  }
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ── Wildcard section ──────────────────────────────────────
-const EMOJI_OPTIONS = [
-  '🍕','🌯','🥙','🫔','🥗','🍜','🍝','🍛','🍣','🥩',
-  '🧆','🥚','🧇','🥓','🥐','🍞','🫕','🍲','🥘','🍱',
-  '🍧','🍨','🍰','🎂','🍮','🍬','🍭','🍪','🧋','🥛',
-  '🍺','🫖','🧊','🍓','🫐','🍉','🍑','🥝','🌶️','🫑'
-];
-
-let wildcards = []; // array of { id, emoji, name, tried, stars }
-
-// Load wildcards
-try {
-  const wc = localStorage.getItem('foodChallengeWildcards');
-  if (wc) wildcards = JSON.parse(wc);
-} catch(e) {}
-
-function saveWildcards() {
-  try { localStorage.setItem('foodChallengeWildcards', JSON.stringify(wildcards)); } catch(e) {}
-}
-
-// Emoji picker setup
-const emojiDropdown = document.getElementById('emojiDropdown');
-EMOJI_OPTIONS.forEach(em => {
-  const span = document.createElement('span');
-  span.className = 'emoji-option';
-  span.textContent = em;
-  span.addEventListener('click', e => {
-    e.stopPropagation();
-    document.getElementById('chosenEmoji').textContent = em;
-    emojiDropdown.style.display = 'none';
-  });
-  emojiDropdown.appendChild(span);
-});
-
-document.getElementById('emojiPickerBtn').addEventListener('click', e => {
-  e.stopPropagation();
-  const isOpen = emojiDropdown.style.display !== 'none';
-  emojiDropdown.style.display = isOpen ? 'none' : 'grid';
-});
-
-document.addEventListener('click', () => { emojiDropdown.style.display = 'none'; });
-
-document.getElementById('wildcardInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addWildcard();
-});
-
-function addWildcard() {
-  const input = document.getElementById('wildcardInput');
-  const name = input.value.trim();
-  if (!name) { input.focus(); return; }
-  const emoji = document.getElementById('chosenEmoji').textContent;
-  const id = 'wc_' + Date.now();
-  wildcards.push({ id, emoji, name, tried: false, stars: 0 });
-  saveWildcards();
-  input.value = '';
-  document.getElementById('chosenEmoji').textContent = '🍽️';
-  renderWildcards();
-  updateScorebarFull();
-  // little bounce on the new card
-  setTimeout(() => {
-    const el = document.getElementById('wcard-' + id);
-    if (el) { el.classList.add('bounce'); setTimeout(() => el.classList.remove('bounce'), 400); }
-  }, 50);
-}
-
-function deleteWildcard(id) {
-  wildcards = wildcards.filter(w => w.id !== id);
-  saveWildcards();
-  renderWildcards();
-  updateScorebarFull();
-}
-
-function toggleWildcardTried(id) {
-  const w = wildcards.find(x => x.id === id);
-  if (!w) return;
-  w.tried = !w.tried;
-  if (!w.tried) w.stars = 0;
-  saveWildcards();
-  renderWildcards();
-  updateScorebarFull();
-  checkMilestones();
-}
-
-function setWildcardStars(id, val) {
-  const w = wildcards.find(x => x.id === id);
-  if (!w) return;
-  w.stars = val;
-  saveWildcards();
-  renderWildcards();
-}
-
-function renderWildcards() {
-  const list = document.getElementById('wildcardList');
-  const empty = document.getElementById('wildcardEmpty');
-  list.innerHTML = '';
-  if (wildcards.length === 0) {
-    list.appendChild(empty || (() => {
-      const d = document.createElement('div');
-      d.className = 'wildcard-empty';
-      d.id = 'wildcardEmpty';
-      d.textContent = 'No discoveries yet — get out there and eat something! 🗺️';
-      return d;
-    })());
-    return;
-  }
-
-  wildcards.forEach(w => {
-    const card = document.createElement('div');
-    card.className = 'food-card' + (w.tried ? ' tried' : '');
-    card.id = 'wcard-' + w.id;
-
-    let starsHtml = `<div class="stars${w.tried ? '' : ' stars-hidden'}" data-wcid="${w.id}">`;
-    for (let i = 1; i <= 5; i++) {
-      starsHtml += `<span class="star${w.stars >= i ? ' lit' : ''}" data-val="${i}">⭐</span>`;
-    }
-    starsHtml += '</div>';
-
-    card.innerHTML = `
-      <span class="food-emoji">${w.emoji}</span>
-      <div class="food-info">
-        <div class="food-name">${w.name}</div>
-        <div class="food-desc">Your own discovery! ✨</div>
-      </div>
-      ${starsHtml}
-      <button class="try-btn" data-wcid="${w.id}">${w.tried ? '✅ Tried!' : 'I tried it!'}</button>
-      <button class="delete-btn" data-wcid="${w.id}" title="Remove">🗑️</button>
-    `;
-    list.appendChild(card);
-  });
-
-  // Events
-  list.querySelectorAll('.try-btn[data-wcid]').forEach(btn => {
-    btn.addEventListener('click', e => { e.stopPropagation(); toggleWildcardTried(btn.dataset.wcid); });
-  });
-  list.querySelectorAll('.delete-btn[data-wcid]').forEach(btn => {
-    btn.addEventListener('click', e => { e.stopPropagation(); deleteWildcard(btn.dataset.wcid); });
-  });
-  list.querySelectorAll('.stars[data-wcid] .star').forEach(star => {
-    star.addEventListener('click', e => {
-      e.stopPropagation();
-      const id = star.closest('.stars').dataset.wcid;
-      setWildcardStars(id, parseInt(star.dataset.val));
-    });
-  });
-}
-
-// Override scorebar to include wildcards
-function updateScorebarFull() {
-  const regularTried = Object.values(state).filter(v => v.tried).length;
-  const wildcardTried = wildcards.filter(w => w.tried).length;
-  const total = TOTAL + wildcards.length;
-  const tried = regularTried + wildcardTried;
-  document.getElementById('triedCount').textContent = tried;
-  document.getElementById('totalCount').textContent = total;
-  const pct = total > 0 ? (tried / total) * 100 : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-}
-
-// Patch getTriedCount to include wildcards for milestone checks
-function getTriedCount() {
-  const regularTried = Object.values(state).filter(v => v.tried).length;
-  const wildcardTried = wildcards.filter(w => w.tried).length;
-  return regularTried + wildcardTried;
-}
-
-// ── Init ──────────────────────────────────────────────────
-render();
-renderWildcards();
-updateScorebarFull();
-</script>
-</body>
-</html>
