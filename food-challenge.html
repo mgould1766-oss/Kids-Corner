@@ -28,31 +28,33 @@
   }
 
   .header-strip {
-    height: 18px;
-    background: repeating-linear-gradient(
-      90deg,
-      #FFD166 0px, #FFD166 18px,
-      #7BDFF2 18px, #7BDFF2 36px,
-      #FF8FA3 36px, #FF8FA3 54px,
-      #C3F9D9 54px, #C3F9D9 72px,
-      #D7C9E8 72px, #D7C9E8 90px
-    );
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 0;
-  }
+   .header-strip {
+  height: 22px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD166 0px, #FFD166 30px,
+    #7BDFF2 30px, #7BDFF2 60px,
+    #FF8FA3 60px, #FF8FA3 90px,
+    #C3F9D9 90px, #C3F9D9 120px,
+    #D7C9E8 120px, #D7C9E8 150px
+  );
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0;
+}
 
-  .footer-strip {
-    height: 18px;
-    background: repeating-linear-gradient(
-      90deg,
-      #D7C9E8 0px, #D7C9E8 18px,
-      #C3F9D9 18px, #C3F9D9 36px,
-      #FF8FA3 36px, #FF8FA3 54px,
-      #7BDFF2 54px, #7BDFF2 72px,
-      #FFD166 72px, #FFD166 90px
-    );
-    border-radius: 0 0 10px 10px;
-    margin-top: 0;
+.footer-strip {
+  height: 22px;
+  background: repeating-linear-gradient(
+    90deg,
+    #D7C9E8 0px, #D7C9E8 30px,
+    #C3F9D9 30px, #C3F9D9 60px,
+    #FF8FA3 60px, #FF8FA3 90px,
+    #7BDFF2 90px, #7BDFF2 120px,
+    #FFD166 120px, #FFD166 150px
+  );
+  border-radius: 0 0 10px 10px;
+  margin-top: 0;
+}
   }
 
   .menu-board {
@@ -390,19 +392,36 @@
     font-style: italic;
   }
 
-  .delete-btn {
-    background: none;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0.35;
-    transition: opacity 0.2s, transform 0.2s;
-    flex-shrink: 0;
-    padding: 2px 4px;
-    line-height: 1;
-  }
+ .delete-btn {
+  background: #FFF1F4;
+  border: 1px solid #FFB3C1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s, transform 0.2s, background 0.2s;
+  flex-shrink: 0;
+  padding: 6px 8px;
+  line-height: 1;
+  color: #A64D6B;
+}
 
-  .delete-btn:hover { opacity: 0.9; transform: scale(1.2); }
+.delete-btn:hover {
+  opacity: 1;
+  transform: scale(1.08);
+  background: #FFE3EA;
+}function deleteWildcard(id) {
+  const item = wildcards.find(w => w.id === id);
+  if (!item) return;
+
+  const ok = confirm(`Remove "${item.name}" from Our Own Discoveries?`);
+  if (!ok) return;
+
+  wildcards = wildcards.filter(w => w.id !== id);
+  saveWildcards();
+  renderWildcards();
+  updateScorebarFull();
+}
 
   #celebration {
     position: fixed;
